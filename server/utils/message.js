@@ -1,6 +1,5 @@
 var moment = require('moment');
 
-
 var timeStamp = moment().valueOf();
 
 var generateMessage = (from, text) => {
