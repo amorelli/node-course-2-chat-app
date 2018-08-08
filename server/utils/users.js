@@ -1,9 +1,3 @@
-[{
-	id: '1232edw2',
-	name: 'Adam',
-	room: 'Room 1'
-}]
-
 class Users {
 	constructor () {
 		this.users = [];
@@ -30,6 +24,10 @@ class Users {
 		var namesArray = users.map((user) => user.name);
 
 		return namesArray;
+	}
+	getRoomList () {
+		var rooms = [...new Set( this.users.map(obj => obj.room))];
+		return rooms;
 	}
 }
 

@@ -5,6 +5,15 @@
 	<title>Join | ChatApp</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<link rel="stylesheet" href="/css/styles.css">
+	 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!--   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+  $( function() {
+    $( "#number" )
+      .selectmenu()
+      .selectmenu( "menuWidget" )
+        .addClass( "overflow" );
+  </script> -->
 </head>
 <body class="centered-form">
 	<div class="centered-form__form">
@@ -21,10 +30,23 @@
 				<input type="text" name="room"/>
 			</div>
 			<div class="form-field">
+				<label for="number">Select a room</label>
+				<select name="room" id="room-list">
+				<option disabled selected>Please pick one</option>
+			    </select>
+			</div>
+			<div class="form-field">
 				<button>Join</button>
 			</div>
 		</form>
 	</div>
+
+<script src="/socket.io/socket.io.js"></script>
+	<script src ='/js/libs/jquery-3.3.1.min.js'></script>
+<!-- 	<script src ='/js/libs/moment.js'></script>
+	<script src ='/js/libs/mustache.js'></script>
+	<script src ='/js/libs/deparam.js'></script> -->
+	<script src ='/js/index.js'></script>
 </body>
 
 </html>

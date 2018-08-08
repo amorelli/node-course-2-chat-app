@@ -25,14 +25,23 @@ io.on('connection', (socket) => {
 			return callback('Name and room name are requried.');
 		}
 
-		socket.join(params.room);
+		if (users.getUserList(params.room).includes(params.name)) {
+			return callback('Name already taken.');
+		}
+		// console.log(params.name, ' ', users.getUserList(params.room));
+		// console.log(users.getUserList(params.room).includes(params.name));
+
+		var room = params.room.toLowerCase();
+		socket.join(room);
 		// User is removed from any previous rooms and added to the joined room
 		users.removeUser(socket.id);
-		users.addUser(socket.id, params.name, params.room);
+		users.addUser(socket.id, params.name, room);
 
-		io.to(params.room).emit('updateUserList', users.getUserList(params.room));
+		io.to(room).emit('updateUserList', users.getUserList(room));
+		// console.log(users.getUserList(params.room));
+		
 		// Message, of event type newMessage, from admin to greet the individual user
-		socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat App.'));
+		socket.emit('newMessage', generateMessage('Admin', `Welcome to the ${room} room.`));
 
 		socket.broadcast.to(params.room).emit('newMessage', generateMessage('Admin', `${params.name} has joined!`));
 
@@ -66,7 +75,15 @@ io.on('connection', (socket) => {
 			io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left.`));
 		}
 	});
+
+	socket.on('updateRoomList', (callback) => {
+		var rooms = users.getRoomList();
+		callback(rooms);
+		console.log(users.getRoomList());
+	});
 });
+
+
 
 server.listen(port, () => {
 	console.log(`Started on port ${port}`);
