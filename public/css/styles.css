@@ -95,6 +95,24 @@ button:disabled {
   background: linear-gradient(325deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* w3c */
 }
 
+.chat__sidebar #user {
+  color: #a8d4ff;
+  font-weight: 700;
+  font-size: 2em;
+  padding: 10px;
+  margin: 10px;
+  position: fixed;
+  bottom:0;
+}
+
+.chat__sidebar #room-name {
+  color: #a8d4ff;
+  font-weight: 700;
+  font-size: 2em;
+  padding: 10px;
+  margin: 10px;
+}
+
 .chat__sidebar h3 {
   color: #e6eaee;
   margin: 10px 20px;

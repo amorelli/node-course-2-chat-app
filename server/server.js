@@ -38,8 +38,12 @@ io.on('connection', (socket) => {
 		users.addUser(socket.id, params.name, room);
 
 		io.to(room).emit('updateUserList', users.getUserList(room));
-		// console.log(users.getUserList(params.room));
+
+		io.emit('updateRoomList', users.getRoomList());
 		
+		socket.emit('getCurrentUser', users.getUser(socket.id).name);
+		socket.emit('getRoomName', users.getUser(socket.id).room);
+		// console.log(users.getUser(socket.id).name);
 		// Message, of event type newMessage, from admin to greet the individual user
 		socket.emit('newMessage', generateMessage('Admin', `Welcome to the ${room} room.`));
 
@@ -74,12 +78,14 @@ io.on('connection', (socket) => {
 			io.to(user.room).emit('updateUserList', users.getUserList(user.room));
 			io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left.`));
 		}
+
+		io.emit('updateRoomList', users.getRoomList());
 	});
 
 	socket.on('updateRoomList', (callback) => {
 		var rooms = users.getRoomList();
 		callback(rooms);
-		console.log(users.getRoomList());
+		// console.log(users.getRoomList());
 	});
 });
 
