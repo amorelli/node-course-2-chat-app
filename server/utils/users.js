@@ -1,45 +1,50 @@
 class Users {
-	constructor () {
-		this.users = [];
-	}
-	addUser (id, name, room) {
-		var user = {id, name, room};
-		this.users.push(user);
-		return user;
-	}
-	removeUser (id) {
-		var user = this.getUser(id);
+  constructor() {
+    this.users = [];
+  }
 
-		if (user) {
-			this.users = this.users.filter((user) => user.id !== id);
-		}
+  addUser(id, name, room) {
+    const user = { id, name, room };
+    this.users.push(user);
+    return user;
+  }
 
-		return user;
-	}
-	getUser (id) {
-		return this.users.filter((user) => user.id === id)[0];
-	}
-	getUserList (room) {
-		var users = this.users.filter((user) => user.room === room);
-		var namesArray = users.map((user) => user.name);
+  removeUser(id) {
+    const user1 = this.getUser(id);
 
-		return namesArray;
-	}
-	getRoomList () {
-		var rooms = [...new Set( this.users.map(obj => obj.room))];
-		return rooms;
-	}
+    if (user1) {
+      this.users = this.users.filter(user => user.id !== id);
+    }
+
+    return user1;
+  }
+
+  getUser(id) {
+    return this.users.filter(user => user.id === id)[0];
+  }
+
+  getUserList(room) {
+    const users = this.users.filter(user => user.room === room);
+    const namesArray = users.map(user => user.name);
+
+    return namesArray;
+  }
+
+  getRoomList() {
+    const rooms = [...new Set(this.users.map(obj => obj.room))];
+    return rooms;
+  }
 }
 
-module.exports = {Users};
+module.exports = { Users };
 
 // class Person {
-// 	constructor (name) {
-// 		this.name = name;
-// 	}
-// 	getUserDescription  () {
-// 		return `Hello, ${this.name}`;
-// 	}
+//  constructor(name) {
+//    this.name = name;
+//  }
+//  getUserDescription  () {
+//    return `Hello, ${this.name}`;
+//  }
 // }
 
 // var me = new Person('Adam');

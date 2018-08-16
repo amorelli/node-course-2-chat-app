@@ -1,9 +1,9 @@
-var socket = io();
-socket.on('connect', function () {
-	socket.emit('updateRoomList', function (rooms) {
+const socket = io();
+socket.on('connect', () => {
+  socket.emit('updateRoomList', (rooms) => {
 
-		rooms.forEach(function (room) {
-			jQuery('#room-list').append(jQuery('<option></option>').text(room).attr('value', room));
-		});
-	});
+    rooms.forEach((room) => {
+      jQuery('#room-list').append(jQuery('<option></option>').text(room).attr('value', room));
+    });
+  });
 });
