@@ -37,16 +37,3 @@ class Users {
 }
 
 module.exports = { Users };
-
-// class Person {
-//  constructor(name) {
-//    this.name = name;
-//  }
-//  getUserDescription  () {
-//    return `Hello, ${this.name}`;
-//  }
-// }
-
-// var me = new Person('Adam');
-// var description = me.getUserDescription();
-// console.log(description);

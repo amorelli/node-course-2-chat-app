@@ -20,7 +20,7 @@ function scrollToBottom () {
 socket.on('connect', function () {
   // deparam turns URI parameters into object properties, used to pass Room Name and User Name to the Server
 	var params = jQuery.deparam(window.location.search);
-	// Emits custom join event from client, listened to by server, server then sets up the room
+	// Emits custom join event from client, passing the URI params, and callback function for errors
 	socket.emit('join', params, function (err) {
 		if (err) {
 			alert(err);
@@ -64,7 +64,7 @@ socket.on('getCurrentUser', function (user) {
 	jQuery('#user').html(user);
 });
 
-// listens for newMessage event
+// Listens for newMessage event, renders an HTML template (chat.html), and appends the message text, user, and timestamp to the DOM
 socket.on('newMessage', function (message) {
 	var formattedTime = moment(message.createdAt).format('h:mm a');
 	var template = jQuery('#message-template').html();
@@ -77,7 +77,7 @@ socket.on('newMessage', function (message) {
 	jQuery('#messages').append(html);
 	scrollToBottom();
 });
-
+// Same as newMessage event above
 socket.on('newLocationMessage', function (message) {
 	var formattedTime = moment(message.createdAt).format('h:mm a');
 	var template = jQuery('#location-message-template').html();
@@ -91,6 +91,7 @@ socket.on('newLocationMessage', function (message) {
 	scrollToBottom();
 });
 
+// Emits createMessage event on form submission, setting the text to the textbox value, then resets the textbox.
 jQuery('#message-form').on('submit', function (e) {
 	e.preventDefault();
 
