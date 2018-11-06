@@ -1,3 +1,4 @@
+/* eslint-disable */
 var socket = io();
 
 function scrollToBottom () {
@@ -17,6 +18,7 @@ function scrollToBottom () {
 }
 
 socket.on('connect', function () {
+  // deparam turns URI parameters into object properties, used to pass Room Name and User Name to the Server
 	var params = jQuery.deparam(window.location.search);
 	// Emits custom join event from client, listened to by server, server then sets up the room
 	socket.emit('join', params, function (err) {
@@ -32,7 +34,7 @@ socket.on('connect', function () {
 socket.on('disconnect', function () {
 	console.log('Disconnected from server.')
 });
-
+// updateUserList is passed from server to the specified room, and user list is appended on a new user join
 socket.on('updateUserList', function (users) {
 	var ol = jQuery('<ul></ul>');
 
@@ -42,7 +44,7 @@ socket.on('updateUserList', function (users) {
 
 	jQuery('#users').html(ol);
 });
-
+// updateRoomList is passed from server to all rooms, and room list is appended on new user join
 socket.on('updateRoomList', function (rooms) {
 	var ol = jQuery('<ul></ul>');
 
@@ -53,13 +55,13 @@ socket.on('updateRoomList', function (rooms) {
 	jQuery('#rooms').html(ol);
 });
 
+// Gets room name when user joins room, and adds it to the DOM
 socket.on('getRoomName', function (room) {
 	jQuery('#room-name').html(room);
 });
-
+// Same as getRoomName above except for User Name
 socket.on('getCurrentUser', function (user) {
 	jQuery('#user').html(user);
-
 });
 
 // listens for newMessage event
