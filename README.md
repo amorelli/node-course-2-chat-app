@@ -6,6 +6,7 @@
 * User name and chat message validation
 * Location sharing
 * Custom styling
+* Testing with Expect (Jest)
 
 [View site on Heroku](https://ancient-depths-99436.herokuapp.com)
 ___
